@@ -1077,7 +1077,7 @@ class RedshiftDialectMixin(DefaultDialect):
           pg_catalog.array_to_string(c.relacl, '\n') AS "privileges"
         FROM pg_catalog.pg_class c
              LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
-             JOIN pg_catalog.pg_user u ON u.usesysid = c.relowner
+             LEFT JOIN pg_catalog.pg_user u ON u.usesysid = c.relowner
         WHERE c.relkind IN ('r', 'v', 'm', 'S', 'f')
           AND n.nspname !~ '^pg_' {schema_clause} {table_clause}
         UNION
